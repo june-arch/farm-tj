@@ -1,7 +1,7 @@
 "use client";
 
 import { TChartIncome, TChartPrice, TChartWeight } from "@/app/types";
-import { BarChart } from "@mantine/charts";
+import { BarChart, LineChart } from "@mantine/charts";
 import { Card, Flex, Switch, Text } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import dayjs from "dayjs";
@@ -122,7 +122,8 @@ function StrukGrafik({
           <Text mb={20} mx={"auto"}>
             Grafik Harga
           </Text>
-          <BarChart
+          <LineChart
+            curveType="linear"
             h={300}
             data={filteredChartPrice.map((item) => ({
               ...item,
@@ -134,9 +135,6 @@ function StrukGrafik({
             valueFormatter={(value) =>
               `Rp.${new Intl.NumberFormat("en-US").format(value)}`
             }
-            withXAxis
-            withYAxis
-            withBarValueLabel
             series={[{ name: "harga", color: "violet.6" }]}
             tickLine="y"
           />
@@ -147,7 +145,7 @@ function StrukGrafik({
           <Text mb={10} mx={"auto"}>
             Grafik Berat
           </Text>
-          <BarChart
+          <LineChart
             h={300}
             data={filteredChartWeight.map((item) => ({
               ...item,
@@ -160,9 +158,7 @@ function StrukGrafik({
               `${new Intl.NumberFormat("en-US").format(value)}`
             }
             unit="kg"
-            withXAxis
-            withYAxis
-            withBarValueLabel
+            curveType="linear"
             series={[
               { name: "brutto", color: "violet.6" },
               { name: "tarra", color: "blue.6" },
@@ -177,7 +173,7 @@ function StrukGrafik({
           <Text mb={10} mx={"auto"}>
             Grafik Pemasukan
           </Text>
-          <BarChart
+          <LineChart
             h={300}
             data={filteredChartIncome.map((item) => ({
               ...item,
@@ -189,9 +185,7 @@ function StrukGrafik({
             valueFormatter={(value) =>
               `Rp.${new Intl.NumberFormat("en-US").format(Number(value))}`
             }
-            withXAxis
-            withYAxis
-            withBarValueLabel
+            curveType="linear"
             series={[{ name: "pemasukan", color: "violet.6" }]}
             tickLine="y"
           />
