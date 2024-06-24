@@ -140,17 +140,15 @@ function StrukGrafik({
           <Title order={4}>Total Netto By Filter</Title>
           <Text ta={"center"}>
             {filteredChartWeight
-              ? new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                }).format(
-                  (filteredChartWeight as TChartWeight[]).reduce(
-                    (accumulator, currentValue) => {
-                      return accumulator + Number(currentValue.netto);
-                    },
-                    0
-                  )
-                )
+              ? `${new Intl.NumberFormat("en-US", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2,
+                }).format((filteredChartWeight as TChartWeight[]).reduce(
+                  (accumulator, currentValue) => {
+                    return accumulator + Number(currentValue.netto);
+                  },
+                  0
+                ))} kg`
               : "NaN"}
           </Text>
         </Card>
@@ -158,17 +156,15 @@ function StrukGrafik({
           <Title order={4}>Total Brutto By Filter</Title>
           <Text ta={"center"}>
             {filteredChartWeight
-              ? new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                }).format(
-                  (filteredChartWeight as TChartWeight[]).reduce(
-                    (accumulator, currentValue) => {
-                      return accumulator + Number(currentValue.brutto);
-                    },
-                    0
-                  )
-                )
+              ? `${new Intl.NumberFormat("en-US", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2,
+                }).format((filteredChartWeight as TChartWeight[]).reduce(
+                  (accumulator, currentValue) => {
+                    return accumulator + Number(currentValue.brutto);
+                  },
+                  0
+                ))} kg`
               : "NaN"}
           </Text>
         </Card>
