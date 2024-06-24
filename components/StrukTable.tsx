@@ -216,7 +216,7 @@ function StrukTable({ struks }: { struks: TStruk[] }) {
 
   useEffect(() => {
     table.getColumn("tanggal")?.setFilterValue(filterDate);
-  }, [filterDate]);
+  }, [filterDate, table]);
 
   return (
     <>

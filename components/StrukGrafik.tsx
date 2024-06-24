@@ -16,9 +16,6 @@ function StrukGrafik({
   chartWeight: TChartWeight[] | null;
   chartIncome: TChartIncome[] | null;
 }) {
-  if (!chartPrice && !chartIncome && !chartWeight) {
-    return <Text>Grafik Dalam Perbaikan</Text>;
-  }
   const [filterRangeDate, setFilterRangeDate] = useState<
     [Date | null, Date | null]
   >([null, null]);
@@ -94,6 +91,11 @@ function StrukGrafik({
   useEffect(() => {
     console.log(filteredChartPrice, filteredChartIncome, filteredChartWeight);
   }, [filteredChartPrice, filteredChartIncome, filteredChartWeight]);
+
+  if (!chartPrice && !chartIncome && !chartWeight) {
+    return <Text>Grafik Dalam Perbaikan</Text>;
+  }
+  
   return (
     <Flex direction={"column"} gap={"sm"}>
       <Flex direction={"row"} gap={"sm"} align={"center"}>

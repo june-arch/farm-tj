@@ -22,19 +22,19 @@ export const authOptions: AuthOptions = {
     error: "/sign-in"
   },
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async signIn({ user, account, profile }) {
-      const isRegistered = await prisma.user.findUnique({
-        where: {email: user.email ?? ''},
-      });
+  // callbacks: {
+  //   async signIn({ user, account, profile }) {
+  //     const isRegistered = await prisma.user.findUnique({
+  //       where: {email: user.email ?? ''},
+  //     });
 
-      if (!isRegistered){
-        return false;
-      }
+  //     if (!isRegistered){
+  //       return false;
+  //     }
 
-      return true;
-    }
-  }
+  //     return true;
+  //   }
+  // }
 };
 
 const handler = NextAuth(authOptions);
