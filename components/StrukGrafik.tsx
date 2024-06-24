@@ -2,7 +2,7 @@
 
 import { TChartIncome, TChartPrice, TChartWeight } from "@/app/types";
 import { BarChart, LineChart } from "@mantine/charts";
-import { Card, Flex, Switch, Text } from "@mantine/core";
+import { Card, Flex, Switch, Text, Title } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
@@ -95,7 +95,7 @@ function StrukGrafik({
   if (!chartPrice && !chartIncome && !chartWeight) {
     return <Text>Grafik Dalam Perbaikan</Text>;
   }
-  
+
   return (
     <Flex direction={"column"} gap={"sm"}>
       <Flex direction={"row"} gap={"sm"} align={"center"}>
@@ -117,6 +117,62 @@ function StrukGrafik({
           disabled={checked}
         />
       </Flex>
+      <Flex direction={{ base: "column", md: "row" }} gap="sm">
+        <Card className="w-full md:w-1/3" withBorder>
+          <Title order={4}>Total Pemasukan By Filter</Title>
+          <Text ta={"center"}>
+            {filteredChartIncome
+              ? new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(
+                  (filteredChartIncome as TChartIncome[]).reduce(
+                    (accumulator, currentValue) => {
+                      return accumulator + Number(currentValue.pemasukan);
+                    },
+                    0
+                  )
+                )
+              : "NaN"}
+          </Text>
+        </Card>
+        <Card className="w-full md:w-1/3" withBorder>
+          <Title order={4}>Total Netto By Filter</Title>
+          <Text ta={"center"}>
+            {filteredChartWeight
+              ? new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(
+                  (filteredChartWeight as TChartWeight[]).reduce(
+                    (accumulator, currentValue) => {
+                      return accumulator + Number(currentValue.netto);
+                    },
+                    0
+                  )
+                )
+              : "NaN"}
+          </Text>
+        </Card>
+        <Card className="w-full md:w-1/3" withBorder>
+          <Title order={4}>Total Brutto By Filter</Title>
+          <Text ta={"center"}>
+            {filteredChartWeight
+              ? new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(
+                  (filteredChartWeight as TChartWeight[]).reduce(
+                    (accumulator, currentValue) => {
+                      return accumulator + Number(currentValue.brutto);
+                    },
+                    0
+                  )
+                )
+              : "NaN"}
+          </Text>
+        </Card>
+      </Flex>
       {filteredChartPrice && (
         <Card withBorder py="lg ">
           <Text mb={20} mx={"auto"}>
@@ -127,9 +183,9 @@ function StrukGrafik({
             h={300}
             data={filteredChartPrice.map((item) => ({
               ...item,
-              tanggal: `${dayjs(item.createdAt).format(checked ? "YYYY-MM" : "YYYY-MM-DD")} ${
-                item.pabrik
-              }`,
+              tanggal: `${dayjs(item.createdAt).format(
+                checked ? "YYYY-MM" : "YYYY-MM-DD"
+              )} ${item.pabrik}`,
             }))}
             dataKey="tanggal"
             valueFormatter={(value) =>
@@ -149,9 +205,9 @@ function StrukGrafik({
             h={300}
             data={filteredChartWeight.map((item) => ({
               ...item,
-              tanggal: `${dayjs(item.createdAt).format(checked ? "YYYY-MM" : "YYYY-MM-DD")} ${
-                item.pabrik
-              }`,
+              tanggal: `${dayjs(item.createdAt).format(
+                checked ? "YYYY-MM" : "YYYY-MM-DD"
+              )} ${item.pabrik}`,
             }))}
             dataKey="tanggal"
             valueFormatter={(value) =>
@@ -177,9 +233,9 @@ function StrukGrafik({
             h={300}
             data={filteredChartIncome.map((item) => ({
               ...item,
-              tanggal: `${dayjs(item.createdAt).format(checked ? "YYYY-MM" : "YYYY-MM-DD")} ${
-                item.pabrik
-              }`,
+              tanggal: `${dayjs(item.createdAt).format(
+                checked ? "YYYY-MM" : "YYYY-MM-DD"
+              )} ${item.pabrik}`,
             }))}
             dataKey="tanggal"
             valueFormatter={(value) =>
