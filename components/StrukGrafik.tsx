@@ -89,7 +89,7 @@ function StrukGrafik({
     : null;
 
   useEffect(() => {
-    console.log(filteredChartPrice, filteredChartIncome, filteredChartWeight);
+    
   }, [filteredChartPrice, filteredChartIncome, filteredChartWeight]);
 
   if (!chartPrice && !chartIncome && !chartWeight) {

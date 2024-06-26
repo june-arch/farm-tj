@@ -4,8 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const struks = await prisma.struk.findMany({
-      select: { harga: true, createdAt: true, pabrik: true },
-
+      select: { harga: true, createdAt: true, pabrik: true, createdBy: { select: { name: true } } },
       orderBy: {
         createdAt: "asc",
       },
